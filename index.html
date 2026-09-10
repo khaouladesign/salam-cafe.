@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salam Cafe | Coffee Time</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #3b2314;
+            --accent-color: #c89d7c;
+            --light-bg: #fdfbf7;
+            --card-bg: #ffffff;
+            --text-dark: #2c2c2c;
+            --text-light: #777777;
+            --gold: #d4af37;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #1a1a1a;
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+        }
+
+        .phone-container {
+            width: 100%;
+            max-width: 410px;
+            height: 840px;
+            background: var(--light-bg);
+            border-radius: 45px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            overflow-y: auto;
+            position: relative;
+            border: 10px solid #1f120a;
+        }
+
+        .phone-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #3b2314, #1f120a);
+            color: #fff;
+            padding: 40px 20px 30px 20px;
+            text-align: center;
+            border-bottom-left-radius: 35px;
+            border-bottom-right-radius: 35px;
+            position: relative;
+        }
+
+        .badge-discount {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: var(--gold);
+            color: #1f120a;
+            font-weight: 700;
+            font-size: 11px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .logo-area h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            letter-spacing: 2px;
+            color: var(--gold);
+            margin-bottom: 4px;
+        }
+
+        .logo-area p {
+            font-size: 12px;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Hero Banner */
+        .hero {
+            padding: 25px 20px 15px 20px;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            color: var(--primary-color);
+            margin-bottom: 6px;
+        }
+
+        .hero p {
+            font-size: 13px;
+            color: var(--text-light);
+            line-height: 1.4;
+        }
+
+        /* Menu Section */
+        .menu-section {
+            padding: 10px 20px 25px 20px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 19px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid rgba(200, 157, 124, 0.2);
+            padding-bottom: 8px;
+        }
+
+        .menu-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .menu-item {
+            background: var(--card-bg);
+            padding: 14px 16px;
+            border-radius: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(59, 35, 20, 0.04);
+            border: 1px solid rgba(200, 157, 124, 0.25);
+            transition: all 0.2s ease;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-2px);
+            border-color: var(--gold);
+        }
+
+        .item-info h4 {
+            font-size: 15px;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .item-info span {
+            font-size: 12px;
+            color: var(--text-light);
+        }
+
+        .item-right {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .item-price {
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 15px;
+        }
+
+        .add-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        .add-btn:hover {
+            background: var(--gold);
+            color: #1f120a;
+        }
+
+        .add-btn:active {
+            transform: scale(0.9);
+        }
+
+        /* Order CTA Button */
+        .cta-container {
+            padding: 0 20px 30px 20px;
+            text-align: center;
+        }
+
+        .order-btn {
+            background: linear-gradient(135deg, var(--primary-color), #5c3822);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 15px;
+            border-radius: 25px;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(59, 35, 20, 0.25);
+            transition: opacity 0.2s, transform 0.1s;
+        }
+
+        .order-btn:hover {
+            opacity: 0.95;
+            transform: translateY(-1px);
+        }
+
+        /* Location Footer */
+        .footer-info {
+            background: #2b190e;
+            color: #fdfbf7;
+            padding: 18px 20px;
+            text-align: center;
+            font-size: 12px;
+            border-top-left-radius: 25px;
+            border-top-right-radius: 25px;
+        }
+
+        .footer-info p {
+            margin-bottom: 4px;
+        }
+
+        .footer-info span {
+            color: var(--accent-color);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="phone-container">
+        <!-- Header -->
+        <header>
+            <div class="badge-discount">Discount 50%</div>
+            <div class="logo-area">
+                <h1>SALAM CAFE</h1>
+                <p>Premium Quality</p>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <h2>Coffee Time!</h2>
+            <p>Experience the finest blend of rich aromas and luxury moments.</p>
+        </section>
+
+        <!-- Menu Section -->
+        <section class="menu-section">
+            <div class="section-title">
+                <span>Our Special Menu</span>
+                <i class="fa-solid fa-mug-hot" style="color: var(--accent-color);"></i>
+            </div>
+
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Espresso</h4>
+                        <span>Classic rich shot</span>
+                    </div>
+                    <div class="item-right">
+                        <span class="item-price">$2.50</span>
+                        <button class="add-btn" onclick="alert('Added Espresso to order ☕')"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Americano</h4>
+                        <span>Espresso with hot water</span>
+                    </div>
+                    <div class="item-right">
+                        <span class="item-price">$3.00</span>
+                        <button class="add-btn" onclick="alert('Added Americano to order ☕')"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Cappuccino</h4>
+                        <span>Rich foam & milk</span>
+                    </div>
+                    <div class="item-right">
+                        <span class="item-price">$3.80</span>
+                        <button class="add-btn" onclick="alert('Added Cappuccino to order ☕')"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Latte</h4>
+                        <span>Smooth & creamy</span>
+                    </div>
+                    <div class="item-right">
+                        <span class="item-price">$4.20</span>
+                        <button class="add-btn" onclick="alert('Added Latte to order ☕')"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Mocha</h4>
+                        <span>Chocolate coffee blend</span>
+                    </div>
+                    <div class="item-right">
+                        <span class="item-price">$4.50</span>
+                        <button class="add-btn" onclick="alert('Added Mocha to order ☕')"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Order Button -->
+        <div class="cta-container">
+            <button class="order-btn" onclick="alert('Thank you! Your order has been placed successfully. ☕✨')">
+                ORDER NOW <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+
+        <!-- Footer / Location -->
+        <div class="footer-info">
+            <p><i class="fa-solid fa-location-dot" style="color: var(--gold);"></i> Mansoura, Tlemcen, Algeria</p>
+            <span><i class="fa-solid fa-phone"></i> +213 555 12 34 56</span>
+        </div>
+    </div>
+
+</body>
+</html>
