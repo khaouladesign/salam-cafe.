@@ -1,418 +1,470 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Salam Cafe - Premium Quality</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-* {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
-font-family: 'Poppins', sans-serif;
-}
-​body {
-background-color: #1a120b;
-display: flex;
-justify-content: center;
-align-items: center;
-min-height: 100vh;
-}
-​.phone-frame {
-width: 100%;
-max-width: 410px;
-height: 840px;
-background: #fdfbf7;
-border-radius: 40px;
-box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-overflow: hidden;
-position: relative;
-border: 10px solid #2b190e;
-display: flex;
-flex-direction: column;
-}
-​.view {
-display: none;
-flex-direction: column;
-height: 100%;
-overflow-y: auto;
-}
-​.view.active {
-display: flex;
-}
-​/* Welcome View with Hero Image */
-#welcome-view {
-background: linear-gradient(135deg, #3b2314, #1f120a);
-color: #fff;
-justify-content: center;
-align-items: center;
-text-align: center;
-padding: 40px 30px;
-}
-​.welcome-hero-img {
-width: 120px;
-height: 120px;
-border-radius: 50%;
-object-fit: cover;
-border: 3px solid #d4af37;
-box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
-margin-bottom: 25px;
-}
-​.welcome-brand h1 {
-font-family: 'Playfair Display', serif;
-font-size: 34px;
-color: #d4af37;
-letter-spacing: 2px;
-margin-bottom: 8px;
-}
-​.welcome-brand p {
-font-size: 13px;
-color: #c89d7c;
-text-transform: uppercase;
-letter-spacing: 3px;
-margin-bottom: 20px;
-}
-​.welcome-desc {
-font-size: 14px;
-color: #e0d6cd;
-line-height: 1.6;
-margin-bottom: 35px;
-}
-​.btn-start {
-background: #d4af37;
-color: #1f120a;
-border: none;
-width: 100%;
-padding: 16px;
-border-radius: 30px;
-font-size: 16px;
-font-weight: 700;
-cursor: pointer;
-box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
-transition: 0.2s;
-}
-​.btn-start:active {
-transform: scale(0.97);
-}
-​/* Menu View Header & Cards */
-header {
-background: linear-gradient(135deg, #3b2314, #1f120a);
-color: #fff;
-padding: 35px 20px 25px 20px;
-text-align: center;
-border-bottom-left-radius: 30px;
-border-bottom-right-radius: 30px;
-position: relative;
-}
-​.badge {
-position: absolute;
-top: 15px;
-right: 20px;
-background: #d4af37;
-color: #1f120a;
-font-weight: 700;
-font-size: 11px;
-padding: 5px 12px;
-border-radius: 20px;
-}
-​.menu-content {
-padding: 20px;
-flex: 1;
-padding-bottom: 90px;
-}
-​.menu-title {
-font-family: 'Playfair Display', serif;
-font-size: 20px;
-color: #3b2314;
-margin-bottom: 15px;
-border-bottom: 2px solid rgba(200, 157, 124, 0.2);
-padding-bottom: 8px;
-}
-​.menu-card {
-background: #ffffff;
-padding: 12px 14px;
-border-radius: 16px;
-display: flex;
-justify-content: space-between;
-align-items: center;
-margin-bottom: 12px;
-border: 1px solid rgba(200, 157, 124, 0.25);
-box-shadow: 0 4px 10px rgba(59, 35, 20, 0.03);
-}
-​.card-left {
-display: flex;
-align-items: center;
-gap: 12px;
-}
-​.coffee-img {
-width: 50px;
-height: 50px;
-border-radius: 50%;
-object-fit: cover;
-border: 2px solid #d4af37;
-}
-​.card-info h4 {
-font-size: 15px;
-color: #3b2314;
-font-weight: 600;
-}
-​.card-info span {
-font-size: 11px;
-color: #777;
-display: block;
-}
-​.card-right {
-display: flex;
-align-items: center;
-gap: 8px;
-}
-​.price {
-font-weight: 700;
-color: #3b2314;
-font-size: 14px;
-margin-right: 2px;
-}
-​.qty-controls {
-display: flex;
-align-items: center;
-gap: 6px;
-}
-​.btn-qty {
-background: #3b2314;
-color: white;
-border: none;
-width: 28px;
-height: 28px;
-border-radius: 50%;
-cursor: pointer;
-display: flex;
-justify-content: center;
-align-items: center;
-font-size: 14px;
-transition: 0.2s;
-}
-​.btn-qty:active {
-background: #d4af37;
-color: #1f120a;
-transform: scale(0.9);
-}
-​.item-qty-display {
-font-size: 13px;
-font-weight: 600;
-color: #3b2314;
-min-width: 15px;
-text-align: center;
-}
-​/* Floating Cart */
-.floating-cart {
-position: absolute;
-bottom: 0;
-left: 0;
-width: 100%;
-background: #2b190e;
-color: #fff;
-padding: 15px 20px;
-display: flex;
-justify-content: space-between;
-align-items: center;
-border-top-left-radius: 20px;
-border-top-right-radius: 20px;
-}
-​.cart-details span {
-font-size: 11px;
-color: #c89d7c;
-display: block;
-}
-​.cart-details strong {
-font-size: 16px;
-color: #d4af37;
-}
-​.btn-order-now {
-background: #d4af37;
-color: #1f120a;
-border: none;
-padding: 10px 20px;
-font-weight: 700;
-border-radius: 20px;
-cursor: pointer;
-font-size: 14px;
-}
-​#success-view {
-justify-content: center;
-align-items: center;
-text-align: center;
-padding: 40px;
-background: #fdfbf7;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salam Cafe - Premium Quality</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #1a120b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .phone-frame {
+            width: 100%;
+            max-width: 410px;
+            height: 840px;
+            background: #fdfbf7;
+            border-radius: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            overflow: hidden;
+            position: relative;
+            border: 10px solid #2b190e;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .view {
+            display: none;
+            flex-direction: column;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .view.active {
+            display: flex;
+        }
+
+        /* Welcome View with Hero Image */
+        #welcome-view {
+            background: linear-gradient(135deg, #3b2314, #1f120a);
+            color: #fff;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 30px;
+        }
+
+        .welcome-hero-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #d4af37;
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+            margin-bottom: 25px;
+        }
+
+        .welcome-brand h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 34px;
+            color: #d4af37;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .welcome-brand p {
+            font-size: 13px;
+            color: #c89d7c;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+        }
+
+        .welcome-desc {
+            font-size: 14px;
+            color: #e0d6cd;
+            line-height: 1.6;
+            margin-bottom: 35px;
+        }
+
+        .btn-start {
+            background: #d4af37;
+            color: #1f120a;
+            border: none;
+            width: 100%;
+            padding: 16px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+            transition: 0.2s;
+        }
+
+        .btn-start:active {
+            transform: scale(0.97);
+        }
+
+        /* Menu View Header & Cards */
+        header {
+            background: linear-gradient(135deg, #3b2314, #1f120a);
+            color: #fff;
+            padding: 35px 20px 25px 20px;
+            text-align: center;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            position: relative;
+        }
+
+        .badge {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: #d4af37;
+            color: #1f120a;
+            font-weight: 700;
+            font-size: 11px;
+            padding: 5px 12px;
+            border-radius: 20px;
+        }
+
+        .menu-content {
+            padding: 20px;
+            flex: 1;
+            padding-bottom: 90px;
+        }
+
+        .menu-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            color: #3b2314;
+            margin-bottom: 15px;
+            border-bottom: 2px solid rgba(200, 157, 124, 0.2);
+            padding-bottom: 8px;
+        }
+
+        .menu-card {
+            background: #ffffff;
+            padding: 12px 14px;
+            border-radius: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            border: 1px solid rgba(200, 157, 124, 0.25);
+            box-shadow: 0 4px 10px rgba(59, 35, 20, 0.03);
+        }
+
+        .card-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .coffee-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #d4af37;
+        }
+
+        .card-info h4 {
+            font-size: 15px;
+            color: #3b2314;
+            font-weight: 600;
+        }
+
+        .card-info span {
+            font-size: 11px;
+            color: #777;
+            display: block;
+        }
+
+        .card-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .price {
+            font-weight: 700;
+            color: #3b2314;
+            font-size: 14px;
+            margin-right: 2px;
+        }
+
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-qty {
+            background: #3b2314;
+            color: white;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .btn-qty:active {
+            background: #d4af37;
+            color: #1f120a;
+            transform: scale(0.9);
+        }
+
+        .item-qty-display {
+            font-size: 13px;
+            font-weight: 600;
+            color: #3b2314;
+            min-width: 15px;
+            text-align: center;
+        }
+
+        /* Floating Cart */
+        .floating-cart {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #2b190e;
+            color: #fff;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+
+        .cart-details span {
+            font-size: 11px;
+            color: #c89d7c;
+            display: block;
+        }
+
+        .cart-details strong {
+            font-size: 16px;
+            color: #d4af37;
+        }
+
+        .btn-order-now {
+            background: #d4af37;
+            color: #1f120a;
+            border: none;
+            padding: 10px 20px;
+            font-weight: 700;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        #success-view {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px;
+            background: #fdfbf7;
+        }
+    </style>
 </head>
 <body>
-​<div class="phone-frame">
-​<!-- 1. WELCOME SCREEN WITH HERO IMAGE -->
-<div id="welcome-view" class="view active">
-<img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=300" alt="Salam Cafe Hero" class="welcome-hero-img">
-<div class="welcome-brand">
-<h1>SALAM CAFE</h1>
-<p>Premium Quality</p>
-</div>
-<p class="welcome-desc">Experience the finest blend of rich aromas and luxury moments crafted for you.</p>
-<button class="btn-start" onclick="openMenu()">Explore Menu</button>
-</div>
-​<!-- 2. MENU SCREEN WITH QUANTITY CONTROLS -->
-<div id="menu-view" class="view">
-<header>
-<div class="badge">Discount 50%</div>
-<h1 style="font-family: 'Playfair Display', serif; font-size: 24px; color: #d4af37; letter-spacing: 2px;">SALAM CAFE</h1>
-<p style="font-size: 11px; color: #c89d7c; text-transform: uppercase; letter-spacing: 2px;">Coffee Time</p>
-</header>
-​<div class="menu-content">
-<div class="menu-title">Our Special Menu</div>
-​<!-- Espresso -->
-<div class="menu-card">
-<div class="card-left">
-<img src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=150" alt="Espresso" class="coffee-img">
-<div class="card-info">
-<h4>Espresso</h4>
-<span>Classic rich shot</span>
-</div>
-</div>
-<div class="card-right">
-<span class="price">$2.50</span>
-<div class="qty-controls">
-<button class="btn-qty" onclick="updateItem('espresso', 2.50, -1)">-</button>
-<span id="qty-espresso" class="item-qty-display">0</span>
-<button class="btn-qty" onclick="updateItem('espresso', 2.50, 1)">+</button>
-</div>
-</div>
-</div>
-​<!-- Americano -->
-<div class="menu-card">
-<div class="card-left">
-<img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=150" alt="Americano" class="coffee-img">
-<div class="card-info">
-<h4>Americano</h4>
-<span>Espresso & water</span>
-</div>
-</div>
-<div class="card-right">
-<span class="price">$3.00</span>
-<div class="qty-controls">
-<button class="btn-qty" onclick="updateItem('americano', 3.00, -1)">-</button>
-<span id="qty-americano" class="item-qty-display">0</span>
-<button class="btn-qty" onclick="updateItem('americano', 3.00, 1)">+</button>
-</div>
-</div>
-</div>
-​<!-- Cappuccino -->
-<div class="menu-card">
-<div class="card-left">
-<img src="https://images.unsplash.com/photo-1534778101976-62847782c213?w=150" alt="Cappuccino" class="coffee-img">
-<div class="card-info">
-<h4>Cappuccino</h4>
-<span>Rich foam & milk</span>
-</div>
-</div>
-<div class="card-right">
-<span class="price">$3.80</span>
-<div class="qty-controls">
-<button class="btn-qty" onclick="updateItem('cappuccino', 3.80, -1)">-</button>
-<span id="qty-cappuccino" class="item-qty-display">0</span>
-<button class="btn-qty" onclick="updateItem('cappuccino', 3.80, 1)">+</button>
-</div>
-</div>
-</div>
-​<!-- Latte -->
-<div class="menu-card">
-<div class="card-left">
-<img src="https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?w=150" alt="Latte" class="coffee-img">
-<div class="card-info">
-<h4>Latte</h4>
-<span>Smooth & creamy</span>
-</div>
-</div>
-<div class="card-right">
-<span class="price">$4.20</span>
-<div class="qty-controls">
-<button class="btn-qty" onclick="updateItem('latte', 4.20, -1)">-</button>
-<span id="qty-latte" class="item-qty-display">0</span>
-<button class="btn-qty" onclick="updateItem('latte', 4.20, 1)">+</button>
-</div>
-</div>
-</div>
-</div>
-​<!-- Floating Cart Bar -->
-<div id="cart-bar" class="floating-cart" style="display: none;">
-<div class="cart-details">
-<span id="items-count">0 items selected</span>
-<strong id="total-price">$0.00</strong>
-</div>
-<button class="btn-order-now" onclick="orderSuccess()">Order Now</button>
-</div>
-</div>
-​<!-- 3. SUCCESS SCREEN -->
-<div id="success-view" class="view">
-<div style="font-size: 50px; margin-bottom: 20px;">🎉</div>
-<h2 style="font-family: 'Playfair Display', serif; font-size: 24px; color: #3b2314; margin-bottom: 10px;">Order Placed Successfully!</h2>
-<p style="font-size: 13px; color: #777; line-height: 1.5; margin-bottom: 30px;">Thank you for choosing Salam Cafe. Your fresh coffee is being prepared with love.</p>
-<button class="btn-start" onclick="goHome()" style="background: #3b2314; color: #d4af37;">Back to Home</button>
-</div>
-​</div>
-​<script>
-// Store quantities for each item
-let cart = {
-espresso: 0,
-americano: 0,
-cappuccino: 0,
-latte: 0
-};
-​let prices = {
-espresso: 2.50,
-americano: 3.00,
-cappuccino: 3.80,
-latte: 4.20
-};
-​function openMenu() {
-document.getElementById('welcome-view').classList.remove('active');
-document.getElementById('menu-view').classList.add('active');
-}
-​function updateItem(itemKey, price, change) {
-if (cart[itemKey] + change >= 0) {
-cart[itemKey] += change;
-}
-​// Update individual item display quantity
-document.getElementById(qty-${itemKey}).innerText = cart[itemKey];
-​// Calculate totals
-let totalCount = 0;
-let totalPrice = 0;
-​for (let key in cart) {
-totalCount += cart[key];
-totalPrice += cart[key] * prices[key];
-}
-​// Toggle cart bar visibility
-const cartBar = document.getElementById('cart-bar');
-if (totalCount > 0) {
-cartBar.style.display = 'flex';
-document.getElementById('items-count').innerText = ${totalCount} item${totalCount > 1 ? 's' : ''} selected;
-document.getElementById('total-price').innerText = $${totalPrice.toFixed(2)};
-} else {
-cartBar.style.display = 'none';
-}
-}
-​function orderSuccess() {
-document.getElementById('menu-view').classList.remove('active');
-document.getElementById('success-view').classList.add('active');
-}
-​function goHome() {
-// Reset cart
-for (let key in cart) {
-cart[key] = 0;
-document.getElementById(qty-${key}).innerText = 0;
-}
-document.getElementById('cart-bar').style.display = 'none';
-document.getElementById('success-view').classList.remove('active');
-document.getElementById('welcome-view').classList.add('active');
-}
-</script>
+
+    <div class="phone-frame">
+
+        <!-- 1. WELCOME SCREEN WITH HERO IMAGE -->
+        <div id="welcome-view" class="view active">
+            <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=300" alt="Salam Cafe Hero" class="welcome-hero-img" onerror="this.src='https://placehold.co/120x120/3b2314/d4af37?text=Cafe'">
+            <div class="welcome-brand">
+                <h1>SALAM CAFE</h1>
+                <p>Premium Quality</p>
+            </div>
+            <p class="welcome-desc">Experience the finest blend of rich aromas and luxury moments crafted for you.</p>
+            <button class="btn-start" onclick="openMenu()">Explore Menu</button>
+        </div>
+
+        <!-- 2. MENU SCREEN WITH QUANTITY CONTROLS -->
+        <div id="menu-view" class="view">
+            <header>
+                <div class="badge">Discount 50%</div>
+                <h1 style="font-family: 'Playfair Display', serif; font-size: 24px; color: #d4af37; letter-spacing: 2px;">SALAM CAFE</h1>
+                <p style="font-size: 11px; color: #c89d7c; text-transform: uppercase; letter-spacing: 2px;">Coffee Time</p>
+            </header>
+
+            <div class="menu-content">
+                <div class="menu-title">Our Special Menu</div>
+
+                <!-- Espresso -->
+                <div class="menu-card">
+                    <div class="card-left">
+                        <img src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=150" alt="Espresso" class="coffee-img" onerror="this.src='https://placehold.co/50x50/3b2314/d4af37?text=Espresso'">
+                        <div class="card-info">
+                            <h4>Espresso</h4>
+                            <span>Classic rich shot</span>
+                        </div>
+                    </div>
+                    <div class="card-right">
+                        <span class="price">$2.50</span>
+                        <div class="qty-controls">
+                            <button class="btn-qty" onclick="updateItem('espresso', 2.50, -1)">-</button>
+                            <span id="qty-espresso" class="item-qty-display">0</span>
+                            <button class="btn-qty" onclick="updateItem('espresso', 2.50, 1)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Americano -->
+                <div class="menu-card">
+                    <div class="card-left">
+                        <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=150" alt="Americano" class="coffee-img" onerror="this.src='https://placehold.co/50x50/3b2314/d4af37?text=Americano'">
+                        <div class="card-info">
+                            <h4>Americano</h4>
+                            <span>Espresso & water</span>
+                        </div>
+                    </div>
+                    <div class="card-right">
+                        <span class="price">$3.00</span>
+                        <div class="qty-controls">
+                            <button class="btn-qty" onclick="updateItem('americano', 3.00, -1)">-</button>
+                            <span id="qty-americano" class="item-qty-display">0</span>
+                            <button class="btn-qty" onclick="updateItem('americano', 3.00, 1)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cappuccino -->
+                <div class="menu-card">
+                    <div class="card-left">
+                        <img src="https://images.unsplash.com/photo-1534778101976-62847782c213?w=150" alt="Cappuccino" class="coffee-img" onerror="this.src='https://placehold.co/50x50/3b2314/d4af37?text=Cappuccino'">
+                        <div class="card-info">
+                            <h4>Cappuccino</h4>
+                            <span>Rich foam & milk</span>
+                        </div>
+                    </div>
+                    <div class="card-right">
+                        <span class="price">$3.80</span>
+                        <div class="qty-controls">
+                            <button class="btn-qty" onclick="updateItem('cappuccino', 3.80, -1)">-</button>
+                            <span id="qty-cappuccino" class="item-qty-display">0</span>
+                            <button class="btn-qty" onclick="updateItem('cappuccino', 3.80, 1)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Latte -->
+                <div class="menu-card">
+                    <div class="card-left">
+                        <img src="https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?w=150" alt="Latte" class="coffee-img" onerror="this.src='https://placehold.co/50x50/3b2314/d4af37?text=Latte'">
+                        <div class="card-info">
+                            <h4>Latte</h4>
+                            <span>Smooth & creamy</span>
+                        </div>
+                    </div>
+                    <div class="card-right">
+                        <span class="price">$4.20</span>
+                        <div class="qty-controls">
+                            <button class="btn-qty" onclick="updateItem('latte', 4.20, -1)">-</button>
+                            <span id="qty-latte" class="item-qty-display">0</span>
+                            <button class="btn-qty" onclick="updateItem('latte', 4.20, 1)">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Floating Cart Bar -->
+            <div id="cart-bar" class="floating-cart" style="display: none;">
+                <div class="cart-details">
+                    <span id="items-count">0 items selected</span>
+                    <strong id="total-price">$0.00</strong>
+                </div>
+                <button class="btn-order-now" onclick="orderSuccess()">Order Now</button>
+            </div>
+        </div>
+
+        <!-- 3. SUCCESS SCREEN -->
+        <div id="success-view" class="view">
+            <div style="font-size: 50px; margin-bottom: 20px;">🎉</div>
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 24px; color: #3b2314; margin-bottom: 10px;">Order Placed Successfully!</h2>
+            <p style="font-size: 13px; color: #777; line-height: 1.5; margin-bottom: 30px;">Thank you for choosing Salam Cafe. Your fresh coffee is being prepared with love.</p>
+            <button class="btn-start" onclick="goHome()" style="background: #3b2314; color: #d4af37;">Back to Home</button>
+        </div>
+
+    </div>
+
+    <script>
+        // Store quantities for each item
+        let cart = {
+            espresso: 0,
+            americano: 0,
+            cappuccino: 0,
+            latte: 0
+        };
+
+        let prices = {
+            espresso: 2.50,
+            americano: 3.00,
+            cappuccino: 3.80,
+            latte: 4.20
+        };
+
+        function openMenu() {
+            document.getElementById('welcome-view').classList.remove('active');
+            document.getElementById('menu-view').classList.add('active');
+        }
+
+        function updateItem(itemKey, price, change) {
+            if (cart[itemKey] + change >= 0) {
+                cart[itemKey] += change;
+            }
+
+            // Update individual item display quantity
+            document.getElementById(`qty-${itemKey}`).innerText = cart[itemKey];
+
+            // Calculate totals
+            let totalCount = 0;
+            let totalPrice = 0;
+
+            for (let key in cart) {
+                totalCount += cart[key];
+                totalPrice += cart[key] * prices[key];
+            }
+
+            // Toggle cart bar visibility
+            const cartBar = document.getElementById('cart-bar');
+            if (totalCount > 0) {
+                cartBar.style.display = 'flex';
+                document.getElementById('items-count').innerText = `${totalCount} item${totalCount > 1 ? 's' : ''} selected`;
+                document.getElementById('total-price').innerText = `$${totalPrice.toFixed(2)}`;
+            } else {
+                cartBar.style.display = 'none';
+            }
+        }
+
+        function orderSuccess() {
+            document.getElementById('menu-view').classList.remove('active');
+            document.getElementById('success-view').classList.add('active');
+        }
+
+        function goHome() {
+            // Reset cart
+            for (let key in cart) {
+                cart[key] = 0;
+                document.getElementById(`qty-${key}`).innerText = 0;
+            }
+            document.getElementById('cart-bar').style.display = 'none';
+            document.getElementById('success-view').classList.remove('active');
+            document.getElementById('welcome-view').classList.add('active');
+        }
+    </script>
 </body>
     </html>
