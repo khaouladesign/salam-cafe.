@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salam Cafe - Premium Experience</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #1a120b;
+            color: #fdfbf7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .phone-container {
+            width: 100%;
+            max-width: 412px;
+            height: 100vh;
+            max-height: 850px;
+            background-color: #fcf9f5;
+            color: #2c221e;
+            position: relative;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Screens management */
+        .screen {
+            display: none;
+            flex-direction: column;
+            flex: 1;
+            padding: 20px;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        .screen.active {
+            display: flex;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 1. Welcome Screen */
+        #welcome-screen {
+            background: linear-gradient(135deg, #2c1d11 0%, #1a120b 100%);
+            color: #fdfbf7;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .welcome-logo {
+            font-size: 28px;
+            letter-spacing: 2px;
+            color: #d4af37;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .welcome-sub {
+            color: #c5b358;
+            font-size: 14px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        .welcome-title {
+            font-size: 32px;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+        .welcome-desc {
+            color: #dcd6d0;
+            font-size: 15px;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+        .btn-primary {
+            background-color: #d4af37;
+            color: #1a120b;
+            border: none;
+            padding: 16px 40px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+        .btn-primary:active {
+            transform: scale(0.98);
+        }
+
+        /* 2. Menu Screen */
+        .header-banner {
+            background: linear-gradient(135deg, #3d2616 0%, #20130a 100%);
+            color: #fff;
+            padding: 25px 20px;
+            border-radius: 0 0 25px 25px;
+            position: relative;
+            margin: -20px -20px 20px -20px;
+        }
+        .badge-discount {
+            background-color: #d4af37;
+            color: #1a120b;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 4px 10px;
+            border-radius: 12px;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        .top-title {
+            font-size: 22px;
+            letter-spacing: 1px;
+            color: #d4af37;
+            margin-bottom: 4px;
+        }
+        .top-subtitle {
+            font-size: 12px;
+            color: #dcd6d0;
+            letter-spacing: 1px;
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #2c221e;
+        }
+        .menu-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding-bottom: 80px;
+        }
+        .menu-item {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 14px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+        .item-info h4 {
+            font-size: 16px;
+            color: #2c221e;
+            margin-bottom: 4px;
+        }
+        .item-info p {
+            font-size: 12px;
+            color: #7d726c;
+        }
+        .item-action {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .item-price {
+            font-weight: 600;
+            font-size: 15px;
+            color: #3d2616;
+        }
+        .btn-add {
+            background-color: #2c221e;
+            color: #fff;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+        .btn-add:active {
+            background-color: #d4af37;
+            color: #1a120b;
+        }
+
+        /* Bottom Floating Bar for Cart */
+        .cart-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #2c221e;
+            color: #fff;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 20px 20px 0 0;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+        }
+        .cart-info span {
+            display: block;
+            font-size: 12px;
+            color: #b5aca6;
+        }
+        .cart-info strong {
+            font-size: 16px;
+            color: #d4af37;
+        }
+        .btn-checkout {
+            background-color: #d4af37;
+            color: #1a120b;
+            border: none;
+            padding: 10px 24px;
+            font-weight: bold;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        /* 3. Success Order Screen */
+        #success-screen {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 30px;
+        }
+        .success-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+        #success-screen h2 {
+            font-size: 24px;
+            color: #2c221e;
+            margin-bottom: 10px;
+        }
+        #success-screen p {
+            color: #7d726c;
+            font-size: 14px;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="phone-container">
+
+        <!-- SCREEN 1: WELCOME -->
+        <div id="welcome-screen" class="screen active">
+            <div class="welcome-logo">SALAM CAFE</div>
+            <div class="welcome-sub">PREMIUM QUALITY</div>
+            
+            <h1 class="welcome-title">Experience Luxury Coffee Moments</h1>
+            <p class="welcome-desc">Indulge in the finest blend of rich aromas crafted exclusively for true coffee lovers.</p>
+            
+            <button class="btn-primary" onclick="goToMenu()">Explore Menu</button>
+        </div>
+
+        <!-- SCREEN 2: MENU -->
+        <div id="menu-screen" class="screen">
+            <div class="header-banner">
+                <span class="badge-discount">Discount 50%</span>
+                <div class="top-title">SALAM CAFE</div>
+                <div class="top-subtitle">PREMIUM QUALITY</div>
+            </div>
+
+            <div class="section-title">Our Special Menu ☕</div>
+            
+            <div class="menu-list">
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Espresso</h4>
+                        <p>Classic rich shot</p>
+                    </div>
+                    <div class="item-action">
+                        <span class="item-price">$2.50</span>
+                        <button class="btn-add" onclick="addToCart('Espresso', 2.50)">+</button>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Americano</h4>
+                        <p>Espresso with hot water</p>
+                    </div>
+                    <div class="item-action">
+                        <span class="item-price">$3.00</span>
+                        <button class="btn-add" onclick="addToCart('Americano', 3.00)">+</button>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Cappuccino</h4>
+                        <p>Rich foam & milk</p>
+                    </div>
+                    <div class="item-action">
+                        <span class="item-price">$3.80</span>
+                        <button class="btn-add" onclick="addToCart('Cappuccino', 3.80)">+</button>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Latte</h4>
+                        <p>Smooth & creamy</p>
+                    </div>
+                    <div class="item-action">
+                        <span class="item-price">$4.20</span>
+                        <button class="btn-add" onclick="addToCart('Latte', 4.20)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Floating Cart Bar -->
+            <div class="cart-bar" id="cart-bar" style="display: none;">
+                <div class="cart-info">
+                    <span id="cart-count">0 items selected</span>
+                    <strong id="cart-total">$0.00</strong>
+                </div>
+                <button class="btn-checkout" onclick="checkout()">Order Now</button>
+            </div>
+        </div>
+
+        <!-- SCREEN 3: SUCCESS -->
+        <div id="success-screen" class="screen">
+            <div class="success-icon">🎉</div>
+            <h2>Order Placed Successfully!</h2>
+            <p>Thank you for choosing Salam Cafe. Your fresh coffee is being prepared with love.</p>
+            <button class="btn-primary" onclick="resetApp()">Back to Home</button>
+        </div>
+
+    </div>
+
+    <script>
+        let cartTotal = 0;
+        let itemCount = 0;
+
+        function goToMenu() {
+            document.getElementById('welcome-screen').classList.remove('active');
+            document.getElementById('menu-screen').classList.add('active');
+        }
+
+        function addToCart(itemName, price) {
+            itemCount++;
+            cartTotal += price;
+            
+            let cartBar = document.getElementById('cart-bar');
+            cartBar.style.display = 'flex';
+            
+            document.getElementById('cart-count').innerText = `${itemCount} items selected`;
+            document.getElementById('cart-total').innerText = `$${cartTotal.toFixed(2)}`;
+        }
+
+        function checkout() {
+            document.getElementById('menu-screen').classList.remove('active');
+            document.getElementById('success-screen').classList.add('active');
+        }
+
+        function resetApp() {
+            cartTotal = 0;
+            itemCount = 0;
+            document.getElementById('cart-bar').style.display = 'none';
+            document.getElementById('success-screen').classList.remove('active');
+            document.getElementById('welcome-screen').classList.add('active');
+        }
+    </script>
+</body>
+</html>
